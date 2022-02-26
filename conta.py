@@ -4,9 +4,9 @@ import decimal as dec
 class Conta:
     # HERE LIMITE HAS A DEFAULT VALUE (100). IF SOMEONE INSTANCES CONTA WITHOUT PASSIN THE VALUE FOR LIMITE, IT WILL
     # ASSUME 100
-    def __init__(self, numero, titular, saldo, limite=100):
+    def __init__(self, conta, titular, saldo, limite=100):
         print(f"Construindo objeto. {self}")
-        self.__numero = numero              # WITH __ YOU TURN THE ATTRIBUTE PRIVATE
+        self.__conta = conta              # WITH __ YOU TURN THE ATTRIBUTE PRIVATE
         self.__titular = titular            # BUT, ALTHOUGH IT IS PRIVATE YOU STILL CAN ACCESS
         self.__saldo = dec.Decimal(saldo)   # PYTHON DOESN´T FORBID YOU, BUT WARN YOU THAT YOU SHOLD NOT DO IT
         self.__limite = limite              # BY SHOWING UNDERSCORES WHEN YOU CALL THESE ATTRIBUTES
@@ -26,3 +26,23 @@ class Conta:
         self.saca(dec.Decimal(valor))
         conta_destino.deposita(dec.Decimal(valor))
         print(f"Transferência realizada com sucesso.")
+
+    @property
+    def saldo(self):
+        return self.__saldo
+
+    @property
+    def titular(self):
+        return self.__titular.title()
+
+    @property
+    def conta(self):
+        return self.__conta
+
+    @property
+    def limite(self):
+        return self.__limite
+
+    @limite.setter
+    def limite(self, novo_limite):
+        self.__limite = novo_limite
